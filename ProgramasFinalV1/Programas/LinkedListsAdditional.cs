@@ -126,69 +126,121 @@ namespace ProgramasFinalV1.Programas
 
     internal class LinkedListsAdditional
     {
-        // 1. Invert a series of numbers using vectors, queues, and stacks
-        public void InvertNumbersDemonstration(int[] numbers)
+        // 1) Invert numbers and return the inverted sequence
+        public CustomVector<int> InvertNumbers(CustomVector<int> numbers)
         {
-            CustomVector<int> vector = new CustomVector<int>(numbers.Length);
-            CustomQueue<int> queue = new CustomQueue<int>(numbers.Length);
-            CustomStack<int> stack = new CustomStack<int>(numbers.Length);
+            CustomVector<int> result = new CustomVector<int>();
+            if (numbers == null) return result;
 
-            // Store in Vector
-            foreach (var num in numbers) vector.Add(num);
+            CustomQueue<int> queue = new CustomQueue<int>(numbers.Size());
+            CustomStack<int> stack = new CustomStack<int>(numbers.Size());
 
-            // Transfer from Vector to Queue
-            for (int i = 0; i < vector.Size(); i++) queue.Enqueue(vector.Get(i));
-
-            // Transfer from Queue to Stack (this prepares inversion)
+            for (int i = 0; i < numbers.Size(); i++) queue.Enqueue(numbers.Get(i));
             while (!queue.IsEmpty()) stack.Push(queue.Dequeue());
+            while (!stack.IsEmpty()) result.Add(stack.Pop());
 
-            // Pop from Stack to print inverted numbers
-            Console.WriteLine("Inverted numbers:");
-            while (!stack.IsEmpty()) Console.WriteLine(stack.Pop());
+            return result;
         }
 
-        // 2. Iterate over the doubly linked list forward and reverse
-        public void IterateDoublyLinkedList(DoublyLinkedList list)
+        // 2) Traverse doubly linked list in both directions and print while traversing
+        public void TraverseDoubly(DoublyLinkedList list)
         {
-            if (list == null || list.IsEmpty()) return;
+            if (list == null || list.IsEmpty())
+            {
+                Console.WriteLine("Doubly linked list is empty.");
+                return;
+            }
 
-            DoubleNode current = list.GetHead();
+            int size = list.GetSize();
 
             Console.WriteLine("Forward:");
-            while (current != null)
+            for (int i = 0; i < size; i++)
             {
-                Console.WriteLine(current.Data);
-                if (current.Next == null) break; // keep reference to tail
-                current = current.Next;
+                Console.WriteLine(list.GetAt(i).Data);
             }
 
             Console.WriteLine("Reverse:");
-            // Since we break when current.Next == null, 'current' is locally at the tail
-            while (current != null)
+            for (int i = size - 1; i >= 0; i--)
             {
-                Console.WriteLine(current.Data);
-                current = current.Prev;
+                Console.WriteLine(list.GetAt(i).Data);
             }
         }
 
-        // 3. Create a queue of stacks or a stack of queues
-        public void ComplexStructuresDemonstration()
+        // 3) Create and return a queue of stacks
+        public CustomQueue<CustomStack<int>> CreateQueueOfStacks(CustomVector<CustomVector<int>> stacksData)
         {
-            // Queue of Stacks
-            CustomQueue<CustomStack<int>> queueOfStacks = new CustomQueue<CustomStack<int>>(5);
-            CustomStack<int> myStack = new CustomStack<int>(5);
-            myStack.Push(10);
-            myStack.Push(20);
-            queueOfStacks.Enqueue(myStack);
+            CustomQueue<CustomStack<int>> queueOfStacks = new CustomQueue<CustomStack<int>>();
+            if (stacksData == null) return queueOfStacks;
 
-            // Stack of Queues
-            CustomStack<CustomQueue<int>> stackOfQueues = new CustomStack<CustomQueue<int>>(5);
-            CustomQueue<int> myQueue = new CustomQueue<int>(5);
-            myQueue.Enqueue(1); // Since CustomQueue now takes int
-            myQueue.Enqueue(2);
-            stackOfQueues.Push(myQueue);
+            for (int i = 0; i < stacksData.Size(); i++)
+            {
+                CustomStack<int> stack = new CustomStack<int>();
+                CustomVector<int> currentStackData = stacksData.Get(i);
 
-            Console.WriteLine("Added a stack to the queue and a queue to the stack successfully.");
+                if (currentStackData != null)
+                {
+                    for (int j = 0; j < currentStackData.Size(); j++)
+                    {
+                        stack.Push(currentStackData.Get(j));
+                    }
+                }
+
+                queueOfStacks.Enqueue(stack);
+            }
+
+            return queueOfStacks;
         }
+
+        /*
+         * =============================
+         * 1) PART THAT INVERTS NUMBERS
+         * =============================
+         * Main function:
+         * - InvertNumbers(CustomVector<int> numbers)
+         *
+         * Return type:
+         * - CustomVector<int> (inverted values)
+         *
+         * Involved methods:
+         * - CustomVector<T>.Get(int index)
+         * - CustomVector<T>.Size()
+         * - CustomVector<T>.Add(T item)
+         * - CustomQueue<T>.Enqueue(T item)
+         * - CustomQueue<T>.Dequeue()
+         * - CustomQueue<T>.IsEmpty()
+         * - CustomStack<T>.Push(T item)
+         * - CustomStack<T>.Pop()
+         * - CustomStack<T>.IsEmpty()
+         */
+
+        /*
+         * =========================================
+         * 2) DOUBLY LINKED LIST TRAVERSAL (OUTPUT)
+         * =========================================
+         * Main function:
+         * - TraverseDoubly(DoublyLinkedList list)
+         *
+         * Behavior:
+         * - Prints while traversing (no extra storage structure)
+         *
+         * Involved methods:
+         * - DoublyLinkedList.IsEmpty()
+         * - DoublyLinkedList.GetSize()
+         * - DoublyLinkedList.GetAt(int index)
+         */
+
+        /*
+         * ==================
+         * 3) QUEUE OF STACKS
+         * ==================
+         * Main function:
+         * - CreateQueueOfStacks(CustomVector<CustomVector<int>> stacksData)
+         *
+         * Involved methods:
+         * - CustomVector<T>.Get(int index)
+         * - CustomVector<T>.Size()
+         * - CustomStack<T>.Push(T item)
+         * - CustomQueue<T>.Enqueue(T item)
+         */
     }
 }

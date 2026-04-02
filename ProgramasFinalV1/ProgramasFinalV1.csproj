@@ -47,6 +47,7 @@
     <Compile Include="Programas\LinkedLists.cs" />
     <Compile Include="Programas\LinkedListsAdditional.cs" />
     <Compile Include="Programas\Matrices.cs" />
+    <Compile Include="Programas\Trees.cs" />
     <Compile Include="Programas\Vectores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

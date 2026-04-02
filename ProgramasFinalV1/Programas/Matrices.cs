@@ -322,5 +322,32 @@ namespace ProgramasFinalV1.Programas
             checklist[num - 1] = true;
             return true;
         }
+
+        public static bool EsSolucionValida(int[,] matrix)
+        {
+            if (matrix.GetLength(0) != 9 || matrix.GetLength(1) != 9)
+                return false;
+
+            for (int i = 0; i < 9; i++)
+            {
+                bool[] rowCheck = new bool[9];
+                bool[] colCheck = new bool[9];
+
+                for (int j = 0; j < 9; j++)
+                {
+                    if (!ValidarCelda(matrix[i, j], rowCheck)) return false;
+                    if (!ValidarCelda(matrix[j, i], colCheck)) return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool ValidarCelda(int valor, bool[] checklist)
+        {
+            if (valor < 1 || valor > 9) return false;
+            if (checklist[valor - 1]) return false;
+            checklist[valor - 1] = true;
+            return true;
+        }
     }
 }
