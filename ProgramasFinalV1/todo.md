@@ -8,8 +8,8 @@ Sudoku -
 LinkedList -
 Invertir Numeros -
 Lista Doble -
-Pila de colas 
-Clase arbol
+Pila de colas -
+Clase arbol - 
 Post Orden
 Pre Orden
 In
