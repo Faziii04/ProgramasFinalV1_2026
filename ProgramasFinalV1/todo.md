@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProgramasFinalV1
-{
-    class todo
-    {
-    }
-}
+﻿Clase vector -
+Clase matrix -
+Ordenar -
+Ordenar nuevo -
+Inversa -	
+Sistema Ecuaciones -
+Sudoku -
+LinkedList -
+Invertir Numeros -
+Lista Doble -
+Pila de colas 
+Clase arbol
+Post Orden
+Pre Orden
+In
+Amplitud
+Arbol Ordenado
